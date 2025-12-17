@@ -1,301 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matim Works - Your vision, my code</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <style>
-        /* === CSS === */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: #333; background-color: #F4F4F4; }
-        a { text-decoration: none; color: inherit; }
-        img { max-width: 100%; height: auto; }
-        button { cursor: pointer; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matim Works – Your vision, our code</title>
 
-        /* Header / Navbar */
-        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
-        nav {
-            display: flex; align-items: center; justify-content: space-between;
-            height: 60px; padding: 0 20px;
-            background: linear-gradient(90deg, #8A2BE2, #1E90FF); color: white;
-        }
-        .logo { display: flex; align-items: center; }
-        .logo img.navbar-logo { max-height: 50px; height: 50px; width: auto; object-fit: contain; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { font-weight: 500; font-size: 1rem; color: white; }
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-        .hamburger div { height: 3px; width: 25px; background-color: white; border-radius: 2px; }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-        /* Mobile responsiveness */
-        @media (max-width: 992px) { .logo img.navbar-logo { max-height: 40px; height: 40px; } }
-        @media (max-width: 768px) {
-            .logo img.navbar-logo { max-height: 35px; height: 35px; }
-            .nav-links { display: none; flex-direction: column; background: linear-gradient(90deg, #8A2BE2, #1E90FF); position: absolute; top: 60px; right: 0; width: 200px; border-radius: 0 0 10px 10px; padding: 10px 0; }
-            .nav-links.active { display: flex; }
-            .hamburger { display: flex; }
-        }
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Roboto', sans-serif; color: #333; background: #F4F4F4; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
 
-        /* Hero Section */
-        .hero { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 20px 150px 20px; text-align: center; background: linear-gradient(135deg, #8A2BE2, #1E90FF); color: white; }
-        .hero h1, .hero p, .hero .btn { opacity: 0; transform: translateY(20px); animation: fadeSlideUp 1s ease-out forwards; }
-        .hero h1 { font-family: 'Montserrat', sans-serif; font-size: 3rem; animation-delay: 0.3s; margin-bottom: 20px; }
-        .hero p { animation-delay: 0.8s; font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; }
-        .hero .btn { animation-delay: 1.3s; padding: 12px 30px; background-color: #FF6B6B; color: white; border: none; border-radius: 5px; font-weight: 600; transition: 0.3s; }
-        .hero .btn:hover { background-color: #FF5252; transform: scale(1.05); }
-        @keyframes fadeSlideUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+    /* ================= NAVBAR ================= */
+    header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+    nav {
+      display: flex;
+      align-items: center;
+      height: 60px;
+      padding: 0 20px;
+      background: linear-gradient(90deg, #8A2BE2, #1E90FF);
+      color: white;
+    }
 
-        /* About Section */
-        section.about { padding: 80px 20px; text-align: center; background-color: white; }
-        section.about h2 { font-family: 'Montserrat', sans-serif; font-size: 2rem; margin-bottom: 20px; }
-        section.about p { max-width: 700px; margin: auto; font-size: 1.1rem; }
+    .logo { flex-shrink: 0; }
+    .brand-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      animation: shine 2s infinite;
+    }
 
-        /* Services Section */
-        section.services { padding: 80px 20px; }
-        .services-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
-        .service-box { background: white; padding: 30px 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .service-box:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
-        .service-box h3 { font-family: 'Montserrat', sans-serif; margin-bottom: 15px; color: #1E90FF; }
-        .service-box img, .service-box i { width: 60px; margin-bottom: 15px; }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      margin-left: auto; 
+    }
+    .nav-links a { font-weight: 500; color: #fff; transition: color 0.3s; }
+    .nav-links a:hover { color: #FFD700; }
 
-        /* Pricing Section */
-        .pricing { padding: 80px 20px; background-color: #F4F4F4; text-align: center; }
-        .pricing-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
-        .pricing-box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
-        .pricing-box h3 { color: #1E90FF; margin-bottom: 15px; }
-        .pricing-box p.price { font-size: 1.5rem; font-weight: bold; margin: 20px 0; }
-        .pricing-box ul { text-align: left; margin-bottom: 20px; list-style: disc; padding-left: 20px; }
-        .pricing-box .btn { background-color: #FF6B6B; color: white; padding: 10px 20px; border: none; border-radius: 5px; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      margin-left: 15px;
+      cursor: pointer;
+    }
+    .hamburger div { width: 25px; height: 3px; background: #fff; }
 
-        /* Portfolio Section */
-        section.portfolio { padding: 80px 20px; background-color: #F4F4F4; }
-        .portfolio-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: auto; }
-        .portfolio-item { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.3s; }
-        .portfolio-item:hover { transform: scale(1.03); }
-        .portfolio-item img { width: 100%; }
-        .portfolio-item h4 { padding: 15px; font-family: 'Montserrat', sans-serif; color: #1E90FF; text-align: center; }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 220px;
+        background: linear-gradient(90deg, #8A2BE2, #1E90FF);
+        padding: 15px 0;
+        border-radius: 0 0 12px 12px;
+      }
+      .nav-links.active { display: flex; }
+      .hamburger { display: flex; }
+    }
 
-        /* Lightbox */
-        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 10000; }
-        .lightbox img { max-width: 90%; max-height: 90%; border-radius: 10px; }
+    /* ================= ANIMATIONS ================= */
+    @keyframes shine {
+      0% { text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 20px #FFD700; }
+      50% { text-shadow: 0 0 20px #FFD700, 0 0 40px #FFF, 0 0 60px #FFD700; }
+      100% { text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 20px #FFD700; }
+    }
 
-        /* Contact Section */
-        section.contact { padding: 80px 20px; text-align: center; background-color: white; }
-        section.contact h2 { font-family: 'Montserrat', sans-serif; font-size: 2rem; margin-bottom: 20px; }
-        form { max-width: 500px; margin: auto; display: flex; flex-direction: column; gap: 15px; }
-        input, textarea { padding: 12px; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
-        textarea { resize: vertical; min-height: 120px; }
-        .success-msg { color: green; font-weight: 500; display: none; margin-top: 10px; }
+    /* ================= HERO ================= */
+    .hero {
+      padding: 120px 20px 150px;
+      text-align: center;
+      background: linear-gradient(135deg, #8A2BE2, #1E90FF);
+      color: white;
+      overflow: hidden;
+    }
+    .hero h1, .hero h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      animation: shine 2s infinite;
+    }
 
-        /* Footer */
-        footer { padding: 30px 20px; text-align: center; background: linear-gradient(90deg, #8A2BE2, #1E90FF); color: white; }
-        footer a { color: #FF6B6B; }
-    </style>
+    /* ================= SECTIONS ================= */
+    section { padding: 80px 20px; background: #fff; }
+    section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #1E90FF;
+    }
+
+    /* ABOUT */
+    .about p { max-width: 700px; margin: auto; font-size: 1.1rem; text-align: center; }
+
+    /* SERVICES */
+    .services-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .service-box {
+      background: #fff;
+      padding: 35px 25px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .service-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+    }
+    .service-box i { font-size: 50px; color: #8A2BE2; margin-bottom: 15px; }
+    .service-box h3 { color: #1E90FF; margin-bottom: 12px; font-size: 1.25rem; }
+    .service-box p { font-size: 1rem; line-height: 1.5; color: #555; }
+
+    /* PRICING */
+    .pricing { background: #F4F4F4; }
+    .pricing-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .pricing-box {
+      background: #fff;
+      padding: 35px 25px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .pricing-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+    }
+    .pricing-box h3 { margin-bottom: 10px; color: #1E90FF; font-size: 1.3rem; }
+    .pricing-box p { margin-bottom: 8px; color: #555; }
+    .price { font-size: 1.6rem; font-weight: bold; margin: 15px 0; color: #8A2BE2; }
+    .pricing-box .btn {
+      background: linear-gradient(90deg, #8A2BE2, #1E90FF);
+      padding: 12px 25px;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: background 0.3s, transform 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+    .pricing-box .btn:hover { background: linear-gradient(90deg, #FFD700, #FF6B6B); transform: scale(1.05); }
+
+    /* PORTFOLIO */
+    .portfolio { background: #F4F4F4; }
+    .portfolio-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .portfolio-item {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+    }
+    .portfolio-item img { width: 100%; height: 180px; object-fit: cover; }
+    .portfolio-item h4 { padding: 15px; color: #1E90FF; font-size: 1.1rem; }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 800px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    .modal-content img { width: 100%; height: auto; border-radius: 12px; }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #333;
+    }
+
+    /* CONTACT */
+    .contact form {
+      max-width: 500px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input, textarea {
+      padding: 12px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    textarea { min-height: 120px; }
+    .btn { padding: 12px; border: none; border-radius: 5px; background: #FF6B6B; color: #fff; font-weight: 600; cursor: pointer; }
+
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      background: linear-gradient(90deg, #8A2BE2, #1E90FF);
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Header / Navbar -->
 <header>
-    <nav>
-        <div class="logo">
-            <img src="images/mw_logo.png" alt="Matim Works Logo" class="navbar-logo">
-        </div>
-
-        <div class="hamburger" id="hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-
-        <div class="nav-links" id="nav-links">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
+  <nav>
+    <div class="logo"><span class="brand-text">Matim Works</span></div>
+    <div class="nav-links" id="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+  </nav>
 </header>
 
-<!-- Hero Section -->
 <section class="hero">
-    <h1>Websites that work for your vision</h1>
-    <p>Hi, I’m Mark Timothy also known as Matim. I build custom websites that help your business succeed online. Simple, reliable, and tailored to your goals — because your vision deserves the right code.</p>
-    <button class="btn">Get Your Free Quote</button>
+  <h2>Your vision, our code – creating websites that work</h2>
+  <h3>Turning vision into reality.</h3>
 </section>
 
-<!-- About Section -->
 <section class="about" id="about">
-    <h2>About Matim Works</h2>
-    <p>I’m Mark Timothy Guanzon, a web developer who loves bringing ideas to life online. I believe that every business deserves a website that not only looks good but works for their goals. At Matim Works, I focus on creating custom websites that are clear, functional, and tailored to your vision. Your business is unique — your website should be too.</p>
+  <h2>About Matim Works</h2>
+  <p>I’m Mark Timothy Guanzon, a web developer focused on creating clean, functional, and reliable websites tailored to your business goals.</p>
 </section>
 
-<!-- Services Section -->
 <section class="services" id="services">
-    <h2 style="text-align:center; font-family: 'Montserrat', sans-serif; margin-bottom:40px;">Services</h2>
-    <div class="services-container">
-        <div class="service-box">
-            <i class="fas fa-briefcase" style="font-size:60px; color:#1E90FF; margin-bottom:15px;"></i>
-            <h3>Business Website Development</h3>
-            <p>I create websites that give your business a professional online presence. From small businesses to growing brands, I’ll design and build a website that clearly represents your vision.</p>
-        </div>
-        <div class="service-box">
-            <img src="https://img.icons8.com/ios-filled/50/1E90FF/shopping-cart.png" alt="eCommerce Website">
-            <h3>eCommerce Website Development</h3>
-            <p>Want to sell online? I’ll set up a full eCommerce website with product listings, carts, checkout, and payment integration so your business can start selling right away.</p>
-        </div>
-        <div class="service-box">
-            <img src="https://img.icons8.com/ios-filled/50/1E90FF/settings.png" alt="Custom Web Systems">
-            <h3>Custom Web Systems</h3>
-            <p>Need something unique? From booking systems to management tools, I build web applications tailored to your specific needs.</p>
-        </div>
-        <div class="service-box">
-            <img src="https://img.icons8.com/ios-filled/50/1E90FF/support.png" alt="Maintenance">
-            <h3>Website Maintenance & Support</h3>
-            <p>Websites need care to run smoothly. I offer maintenance packages to keep your website updated, backed up, and secure.</p>
-        </div>
-        <div class="service-box">
-            <i class="fas fa-rocket" style="font-size:60px; color:#1E90FF; margin-bottom:15px;"></i>
-            <h3>Landing Pages & Marketing Sites</h3>
-            <p>Launching a product or service? I design single-page websites that capture attention and convert visitors into customers.</p>
-        </div>
+  <h2>Services</h2>
+  <div class="services-container">
+    <div class="service-box">
+      <i class="fas fa-briefcase"></i>
+      <h3>Business Website Development</h3>
+      <p>I create websites that give your business a professional online presence. From small businesses to growing brands, I’ll design and build a website that clearly represents your vision.</p>
     </div>
+    <div class="service-box">
+      <i class="fas fa-shopping-cart"></i>
+      <h3>eCommerce Website</h3>
+      <p>Want to sell online? I’ll set up a full eCommerce website with product listings, carts, checkout, and payment integration so your business can start selling right away.</p>
+    </div>
+    <div class="service-box">
+      <i class="fas fa-cogs"></i>
+      <h3>Custom Web Systems</h3>
+      <p>Need something unique? From booking systems to management tools, I build web applications tailored to your specific needs.</p>
+    </div>
+    <div class="service-box">
+      <i class="fas fa-tools"></i>
+      <h3>Maintenance</h3>
+      <p>Websites need care to run smoothly. I offer maintenance packages to keep your website updated, backed up, and secure.</p>
+    </div>
+    <div class="service-box">
+      <i class="fas fa-bullhorn"></i>
+      <h3>Landing Pages & Marketing Sites</h3>
+      <p>Launching a product or service? I design single-page websites that capture attention and convert visitors into customers.</p>
+    </div>
+  </div>
 </section>
 
-<!-- Pricing Section -->
 <section class="pricing" id="pricing">
-    <h2 style="font-family:'Montserrat', sans-serif; margin-bottom:40px;">Pricing</h2>
-    <div class="pricing-container">
-        <div class="pricing-box">
-            <h3>Basic Website</h3>
-            <p>Simple 1–3 pages, responsive design</p>
-            <p class="price">₱15,000</p>
-            <ul>
-                <li>HTML / CSS / JavaScript</li>
-                <li>Responsive Layout</li>
-                <li>Contact Form</li>
-            </ul>
-            <a href="#contact"><button class="btn">Choose Plan</button></a>
-        </div>
-        <div class="pricing-box">
-            <h3>Standard Website</h3>
-            <p>4–7 pages, responsive, basic interactivity</p>
-            <p class="price">₱30,000</p>
-            <ul>
-                <li>HTML / CSS / JavaScript</li>
-                <li>Responsive Layout</li>
-                <li>Basic Animations</li>
-                <li>Portfolio / Gallery</li>
-            </ul>
-            <a href="#contact"><button class="btn">Choose Plan</button></a>
-        </div>
-        <div class="pricing-box">
-            <h3>Premium Website</h3>
-            <p>8+ pages, custom design, advanced features</p>
-            <p class="price">₱60,000</p>
-            <ul>
-                <li>HTML / CSS / JavaScript + Bootstrap + Tailwind CSS</li>
-                <li>JavaScript Frameworks/Libraries: React.js, Vue.js, Angular</li>
-                <li>TypeScript</li>
-                <li>PHP & SQL Database (MySQL)</li>
-                <li>Responsive Layout</li>
-                <li>Custom Animations & Interactivity</li>
-                <li>Portfolio / Blog / Contact</li>
-                <li>Basic SEO Optimization</li>
-            </ul>
-            <a href="#contact"><button class="btn">Choose Plan</button></a>
-        </div>
+  <h2>Pricing</h2>
+  <div class="pricing-container">
+    <div class="pricing-box">
+      <h3>Basic Website</h3>
+      <p class="price">₱15,000</p>
+      <p>Simple 1–3 pages, responsive design</p>
+      <p>HTML / CSS / JavaScript</p>
+      <p>Responsive Layout</p>
+      <p>Contact Form</p>
+      <button class="btn choose-plan" data-plan="Basic Website">Choose Plan</button>
     </div>
+    <div class="pricing-box">
+      <h3>Standard Website</h3>
+      <p class="price">₱30,000</p>
+      <p>4–7 pages, responsive, basic interactivity</p>
+      <p>HTML / CSS / JavaScript</p>
+      <p>Responsive Layout</p>
+      <p>Basic Animations</p>
+      <p>Portfolio / Gallery</p>
+      <button class="btn choose-plan" data-plan="Standard Website">Choose Plan</button>
+    </div>
+    <div class="pricing-box">
+      <h3>Premium Website</h3>
+      <p class="price">₱60,000</p>
+      <p>8+ pages, custom design, advanced features</p>
+      <p>HTML / CSS / JavaScript + Bootstrap + Tailwind CSS</p>
+      <p>JS Frameworks: React.js, Vue.js, Angular</p>
+      <p>TypeScript</p>
+      <p>PHP & SQL Database (MySQL)</p>
+      <p>Responsive Layout</p>
+      <p>Custom Animations & Interactivity</p>
+      <p>Portfolio / Blog / Contact</p>
+      <p>Basic SEO Optimization</p>
+      <button class="btn choose-plan" data-plan="Premium Website">Choose Plan</button>
+    </div>
+  </div>
 </section>
 
-<!-- Portfolio Section -->
 <section class="portfolio" id="portfolio">
-    <h2 style="text-align:center; font-family:'Montserrat', sans-serif; margin-bottom:40px;">Portfolio</h2>
-    <div class="portfolio-container">
-        <div class="portfolio-item">
-            <img src="https://via.placeholder.com/400x250.png?text=Hotel+Booking+System" alt="Hotel Booking System">
-            <h4>Hotel Booking System</h4>
-        </div>
-        <div class="portfolio-item">
-            <img src="https://via.placeholder.com/400x250.png?text=Payroll+System" alt="Payroll System">
-            <h4>LGU Payroll System</h4>
-        </div>
-        <div class="portfolio-item">
-            <img src="https://via.placeholder.com/400x250.png?text=eCommerce+Website" alt="eCommerce Website">
-            <h4>Online Store</h4>
-        </div>
-        <div class="portfolio-item">
-            <img src="images/restaurant.png" alt="Restaurant Website">
-            <h4>Restaurant Website</h4>
-        </div>
-        <div class="portfolio-item">
-            <img src="https://via.placeholder.com/400x250.png?text=School+Website" alt="School/College Website">
-            <h4>School/College Website</h4>
-        </div>
+  <h2>Portfolio</h2>
+  <div class="portfolio-container">
+    <div class="portfolio-item" data-img="https://via.placeholder.com/800x500?text=Hotel+Booking+System">
+      <img src="https://via.placeholder.com/400x250?text=Hotel+Booking+System">
+      <h4>Hotel Booking System</h4>
     </div>
+    <div class="portfolio-item" data-img="https://via.placeholder.com/800x500?text=LGU+Payroll+System">
+      <img src="https://via.placeholder.com/400x250?text=LGU+Payroll+System">
+      <h4>LGU Payroll System</h4>
+    </div>
+    <div class="portfolio-item" data-img="https://via.placeholder.com/800x500?text=eCommerce+Website">
+      <img src="https://via.placeholder.com/400x250?text=eCommerce+Website">
+      <h4>Online Store</h4>
+    </div>
+    <div class="portfolio-item" data-img="images/restaurant.png">
+      <img src="images/restaurant.png">
+      <h4>Restaurant Website</h4>
+    </div>
+    <div class="portfolio-item" data-img="https://via.placeholder.com/800x500?text=School+Website">
+      <img src="https://via.placeholder.com/400x250?text=School+Website">
+      <h4>School / College Website</h4>
+    </div>
+  </div>
 </section>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-    <img src="" alt="Project Preview" id="lightbox-img">
+<div class="modal" id="portfolioModal">
+  <div class="modal-content">
+    <span class="modal-close" id="modalClose">&times;</span>
+    <img src="" id="modalImage">
+  </div>
 </div>
 
-<!-- Contact Section -->
 <section class="contact" id="contact">
-    <h2>Contact Me</h2>
-    <form id="contact-form">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" placeholder="Project Details" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
-        <p class="success-msg" id="success-msg">Your message has been sent!</p>
-    </form>
-    <p style="margin-top:20px;">Or contact me directly: <a href="mailto:marktimothy19861986@gmail.com">marktimothy19861986@gmail.com</a></p>
+  <h2>Contact Me</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required name="name">
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Project Details" required></textarea>
+    <button class="btn">Send Message</button>
+  </form>
 </section>
 
-<!-- Footer -->
 <footer>
-    <p>&copy; 2025 Matim Works | <a href="mailto:marktimothy19861986@gmail.com">marktimothy19861986@gmail.com</a></p>
+  <p>&copy; 2025 Matim Works</p>
 </footer>
 
-<!-- JS -->
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // Hamburger toggle
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('nav-links');
+  // Hamburger toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
 
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
+  // Portfolio modal
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  const modal = document.getElementById('portfolioModal');
+  const modalImg = document.getElementById('modalImage');
+  const modalClose = document.getElementById('modalClose');
+
+  portfolioItems.forEach(item => {
+    item.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      modalImg.src = item.getAttribute('data-img');
     });
+  });
 
-    // Portfolio Lightbox
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
+  modalClose.addEventListener('click', () => modal.style.display = 'none');
+  window.addEventListener('click', e => { if(e.target === modal) modal.style.display = 'none'; });
 
-    portfolioItems.forEach(item => {
-        item.addEventListener('click', () => {
-            lightbox.style.display = 'flex';
-            lightboxImg.src = item.querySelector('img').src;
-        });
+  // Choose Plan buttons
+  const planButtons = document.querySelectorAll('.choose-plan');
+  const contactForm = document.querySelector('.contact form');
+
+  planButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const planName = button.getAttribute('data-plan');
+      contactForm.scrollIntoView({ behavior: 'smooth' });
+      contactForm.querySelector('textarea').value = `I am interested in the "${planName}" plan.`;
+      contactForm.querySelector('input[name="name"]').focus();
     });
-
-    lightbox.addEventListener('click', () => {
-        lightbox.style.display = 'none';
-    });
-
-    // Contact Form Submit (mock)
-    const form = document.getElementById('contact-form');
-    const successMsg = document.getElementById('success-msg');
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        successMsg.style.display = 'block';
-        form.reset();
-        setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
-    });
-});
+  });
 </script>
+
+</body>
+</html>
