@@ -11,7 +11,7 @@
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Roboto', sans-serif; color: #333; background: #F4F4F4; line-height: 1.6; }
+    body { font-family: 'Roboto', sans-serif; color: #333; background: #F4F4F4; line-height: 1.6; scroll-behavior: smooth; }
     a { text-decoration: none; color: inherit; }
 
     /* ================= NAVBAR ================= */
@@ -32,47 +32,26 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
-      animation: shine 2s infinite;
+      animation: shine 2s linear infinite;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      margin-left: auto; 
-    }
-    .nav-links a { font-weight: 500; color: #fff; transition: color 0.3s; }
+    .nav-links { display: flex; gap: 20px; margin-left: auto; }
+    .nav-links a { font-weight: 500; color: #fff; transition: 0.3s; }
     .nav-links a:hover { color: #FFD700; }
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      margin-left: 15px;
-      cursor: pointer;
-    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; margin-left: 15px; cursor: pointer; }
     .hamburger div { width: 25px; height: 3px; background: #fff; }
 
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 220px;
-        background: linear-gradient(90deg, #8A2BE2, #1E90FF);
-        padding: 15px 0;
-        border-radius: 0 0 12px 12px;
-      }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; right: 0; width: 220px; background: linear-gradient(90deg, #8A2BE2, #1E90FF); padding: 15px 0; border-radius: 0 0 12px 12px; }
       .nav-links.active { display: flex; }
       .hamburger { display: flex; }
     }
 
-    /* ================= ANIMATIONS ================= */
     @keyframes shine {
-      0% { text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 20px #FFD700; }
-      50% { text-shadow: 0 0 20px #FFD700, 0 0 40px #FFF, 0 0 60px #FFD700; }
-      100% { text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 20px #FFD700; }
+      0% { color: #FFD700; }
+      50% { color: #ffffff; }
+      100% { color: #FFD700; }
     }
 
     /* ================= HERO ================= */
@@ -81,167 +60,102 @@
       text-align: center;
       background: linear-gradient(135deg, #8A2BE2, #1E90FF);
       color: white;
-      overflow: hidden;
     }
-    .hero h1, .hero h2 {
+
+    .hero h2 {
       font-family: 'Montserrat', sans-serif;
       font-size: 3rem;
-      animation: shine 2s infinite;
+      margin-bottom: 20px;
+      animation: shine 2s linear infinite;
     }
+
+    .hero p { max-width: 650px; margin: auto; font-size: 1.2rem; }
+
+    .hero-btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 25px;
+      background: #FF6B6B;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .hero-btn:hover { background: #FF4B4B; transform: translateY(-3px); }
 
     /* ================= SECTIONS ================= */
     section { padding: 80px 20px; background: #fff; }
-    section h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 40px;
-      color: #1E90FF;
-    }
+    section h2 { font-family: 'Montserrat', sans-serif; font-size: 2rem; text-align: center; margin-bottom: 40px; }
 
     /* ABOUT */
     .about p { max-width: 700px; margin: auto; font-size: 1.1rem; text-align: center; }
 
     /* SERVICES */
-    .services-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: auto;
-    }
+    .services-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
     .service-box {
       background: #fff;
-      padding: 35px 25px;
-      border-radius: 12px;
+      padding: 30px 20px;
+      border-radius: 10px;
       text-align: center;
-      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .service-box:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-    }
-    .service-box i { font-size: 50px; color: #8A2BE2; margin-bottom: 15px; }
-    .service-box h3 { color: #1E90FF; margin-bottom: 12px; font-size: 1.25rem; }
-    .service-box p { font-size: 1rem; line-height: 1.5; color: #555; }
+    .service-box:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+    .service-box i { font-size: 50px; color: #1E90FF; margin-bottom: 15px; }
+    .service-box h3 { color: #1E90FF; margin-bottom: 10px; }
 
     /* PRICING */
     .pricing { background: #F4F4F4; }
-    .pricing-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: auto;
-    }
+    .pricing-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
     .pricing-box {
       background: #fff;
-      padding: 35px 25px;
-      border-radius: 12px;
+      padding: 30px;
+      border-radius: 10px;
       text-align: center;
-      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .pricing-box:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-    }
-    .pricing-box h3 { margin-bottom: 10px; color: #1E90FF; font-size: 1.3rem; }
-    .pricing-box p { margin-bottom: 8px; color: #555; }
-    .price { font-size: 1.6rem; font-weight: bold; margin: 15px 0; color: #8A2BE2; }
-    .pricing-box .btn {
-      background: linear-gradient(90deg, #8A2BE2, #1E90FF);
-      padding: 12px 25px;
-      color: #fff;
-      font-weight: 600;
-      border-radius: 8px;
-      transition: background 0.3s, transform 0.3s;
-      cursor: pointer;
-      border: none;
-    }
-    .pricing-box .btn:hover { background: linear-gradient(90deg, #FFD700, #FF6B6B); transform: scale(1.05); }
+    .pricing-box:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+    .price { font-size: 1.5rem; font-weight: bold; margin: 15px 0; }
+    .choose-plan { margin-top: 15px; padding: 10px 15px; background: #FF6B6B; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+    .choose-plan:hover { background: #FF4B4B; }
+
+    /* Benefits list */
+    .pricing-box ul { list-style: none; margin-top: 15px; text-align: left; padding-left: 20px; }
+    .pricing-box ul li { margin-bottom: 8px; }
 
     /* PORTFOLIO */
     .portfolio { background: #F4F4F4; }
-    .portfolio-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
+    .portfolio-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: auto; }
     .portfolio-item {
       background: #fff;
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
       text-align: center;
-      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
       cursor: pointer;
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .portfolio-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-    }
+    .portfolio-item:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
     .portfolio-item img { width: 100%; height: 180px; object-fit: cover; }
-    .portfolio-item h4 { padding: 15px; color: #1E90FF; font-size: 1.1rem; }
+    .portfolio-item h4 { padding: 15px; color: #1E90FF; }
 
-    /* MODAL */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.85);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 800px;
-      width: 90%;
-      text-align: center;
-      position: relative;
-    }
-    .modal-content img { width: 100%; height: auto; border-radius: 12px; }
-    .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #333;
-    }
+    /* PORTFOLIO MODAL */
+    .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; }
+    .modal-content { background: white; padding: 20px; border-radius: 10px; max-width: 600px; width: 90%; text-align: center; position: relative; }
+    .modal-content img { width: 100%; height: auto; }
+    .close { position: absolute; top: 10px; right: 15px; font-size: 25px; font-weight: bold; cursor: pointer; color: #333; }
 
     /* CONTACT */
-    .contact form {
-      max-width: 500px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    input, textarea {
-      padding: 12px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
+    .contact form { max-width: 500px; margin: auto; display: flex; flex-direction: column; gap: 15px; }
+    input, textarea { padding: 12px; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
     textarea { min-height: 120px; }
-    .btn { padding: 12px; border: none; border-radius: 5px; background: #FF6B6B; color: #fff; font-weight: 600; cursor: pointer; }
 
-    footer {
-      padding: 30px 20px;
-      text-align: center;
-      background: linear-gradient(90deg, #8A2BE2, #1E90FF);
-      color: white;
-    }
+    .btn { padding: 12px; border: none; border-radius: 5px; background: #FF6B6B; color: #fff; font-weight: 600; cursor: pointer; transition: 0.3s; }
+    .btn:hover { background: #FF4B4B; }
+
+    footer { padding: 30px 20px; text-align: center; background: linear-gradient(90deg, #8A2BE2, #1E90FF); color: white; }
   </style>
 </head>
 <body>
@@ -262,7 +176,8 @@
 
 <section class="hero">
   <h2>Your vision, our code – creating websites that work</h2>
-  <h3>Turning vision into reality.</h3>
+  <p>Professional, responsive, and custom websites for your business</p>
+  <a href="#pricing" class="hero-btn">Get Your Website</a>
 </section>
 
 <section class="about" id="about">
@@ -273,31 +188,11 @@
 <section class="services" id="services">
   <h2>Services</h2>
   <div class="services-container">
-    <div class="service-box">
-      <i class="fas fa-briefcase"></i>
-      <h3>Business Website Development</h3>
-      <p>I create websites that give your business a professional online presence. From small businesses to growing brands, I’ll design and build a website that clearly represents your vision.</p>
-    </div>
-    <div class="service-box">
-      <i class="fas fa-shopping-cart"></i>
-      <h3>eCommerce Website</h3>
-      <p>Want to sell online? I’ll set up a full eCommerce website with product listings, carts, checkout, and payment integration so your business can start selling right away.</p>
-    </div>
-    <div class="service-box">
-      <i class="fas fa-cogs"></i>
-      <h3>Custom Web Systems</h3>
-      <p>Need something unique? From booking systems to management tools, I build web applications tailored to your specific needs.</p>
-    </div>
-    <div class="service-box">
-      <i class="fas fa-tools"></i>
-      <h3>Maintenance</h3>
-      <p>Websites need care to run smoothly. I offer maintenance packages to keep your website updated, backed up, and secure.</p>
-    </div>
-    <div class="service-box">
-      <i class="fas fa-bullhorn"></i>
-      <h3>Landing Pages & Marketing Sites</h3>
-      <p>Launching a product or service? I design single-page websites that capture attention and convert visitors into customers.</p>
-    </div>
+    <div class="service-box"><i class="fas fa-briefcase"></i><h3>Business Website Development</h3><p>I create websites that give your business a professional online presence.</p></div>
+    <div class="service-box"><i class="fas fa-shopping-cart"></i><h3>eCommerce Website Development</h3><p>Full eCommerce website with product listings, carts, checkout, and payment integration.</p></div>
+    <div class="service-box"><i class="fas fa-cogs"></i><h3>Custom Web Systems</h3><p>From booking systems to management tools, I build web applications tailored to your needs.</p></div>
+    <div class="service-box"><i class="fas fa-wrench"></i><h3>Website Maintenance & Support</h3><p>Keep your website updated, backed up, and secure with maintenance packages.</p></div>
+    <div class="service-box"><i class="fas fa-bullhorn"></i><h3>Landing Pages & Marketing Sites</h3><p>Single-page websites that capture attention and convert visitors into customers.</p></div>
   </div>
 </section>
 
@@ -306,36 +201,46 @@
   <div class="pricing-container">
     <div class="pricing-box">
       <h3>Basic Website</h3>
-      <p class="price">₱15,000</p>
-      <p>Simple 1–3 pages, responsive design</p>
-      <p>HTML / CSS / JavaScript</p>
-      <p>Responsive Layout</p>
-      <p>Contact Form</p>
-      <button class="btn choose-plan" data-plan="Basic Website">Choose Plan</button>
+      <p class="price">₱14,000</p>
+      <ul>
+        <li><strong>Features:</strong></li>
+        <li>1–3 pages, responsive design</li>
+        <li>HTML / CSS / JavaScript</li>
+        <li>Contact Form</li>
+        <li>Basic SEO Optimization</li>
+        <li><strong>Benefits:</strong></li> <li>Get your business online quickly, fully responsive, easy for clients to reach you.</li> <li>Your website will be hosted securely and reliably so it’s always online and accessible to your clients.</li>
+      </ul>
+      <button class="choose-plan" data-plan="Basic Website">Choose Plan</button>
     </div>
     <div class="pricing-box">
       <h3>Standard Website</h3>
-      <p class="price">₱30,000</p>
-      <p>4–7 pages, responsive, basic interactivity</p>
-      <p>HTML / CSS / JavaScript</p>
-      <p>Responsive Layout</p>
-      <p>Basic Animations</p>
-      <p>Portfolio / Gallery</p>
-      <button class="btn choose-plan" data-plan="Standard Website">Choose Plan</button>
+      <p class="price">₱32,000</p>
+      <ul>
+        <li><strong>Features:</strong></li>
+        <li>4–7 pages, responsive, basic interactivity</li>
+        <li>HTML / CSS / JavaScript</li>
+        <li>Basic Animations</li>
+        <li>Portfolio / Gallery</li>
+        <li>Basic SEO Optimization</li>
+        <li><strong>Benefits:</strong></li><li>Showcase your business, engage visitors with animations, build credibility with portfolio/gallery.</li><li>Your website will be hosted securely and reliably so it’s always online and accessible to your clients.</li>
+      </ul>
+      <button class="choose-plan" data-plan="Standard Website">Choose Plan</button>
     </div>
     <div class="pricing-box">
       <h3>Premium Website</h3>
-      <p class="price">₱60,000</p>
-      <p>8+ pages, custom design, advanced features</p>
-      <p>HTML / CSS / JavaScript + Bootstrap + Tailwind CSS</p>
-      <p>JS Frameworks: React.js, Vue.js, Angular</p>
-      <p>TypeScript</p>
-      <p>PHP & SQL Database (MySQL)</p>
-      <p>Responsive Layout</p>
-      <p>Custom Animations & Interactivity</p>
-      <p>Portfolio / Blog / Contact</p>
-      <p>Basic SEO Optimization</p>
-      <button class="btn choose-plan" data-plan="Premium Website">Choose Plan</button>
+      <p class="price">₱64,000 - ₱75,000</p>
+      <ul>
+        <li><strong>Features:</strong></li>
+        <li>8+ pages, custom design, advanced features</li>
+        <li>HTML / CSS / JS + Bootstrap + Tailwind CSS</li>
+        <li>React.js / Vue.js / Angular</li>
+        <li>TypeScript, PHP & MySQL backend</li>
+        <li>Responsive Layout, Custom Interactivity</li>
+        <li>Portfolio / Blog / Contact</li>
+        <li>Basic SEO Optimization</li>
+        <li><strong>Benefits:</strong></li> <li> Fully customized website, advanced features for your business, SEO optimized to attract clients.</li> <li>Your website will be hosted securely and reliably so it’s always online and accessible to your clients.</li>
+      </ul>
+      <button class="choose-plan" data-plan="Premium Website">Choose Plan</button>
     </div>
   </div>
 </section>
@@ -343,42 +248,29 @@
 <section class="portfolio" id="portfolio">
   <h2>Portfolio</h2>
   <div class="portfolio-container">
-    <div class="portfolio-item" data-img="https://via.placeholder.com/800x500?text=Hotel+Booking+System">
-      <img src="https://via.placeholder.com/400x250?text=Hotel+Booking+System">
-      <h4>Hotel Booking System</h4>
-    </div>
-    <div class="portfolio-item" data-img="https://via.placeholder.com/800x500?text=LGU+Payroll+System">
-      <img src="https://via.placeholder.com/400x250?text=LGU+Payroll+System">
-      <h4>LGU Payroll System</h4>
-    </div>
-    <div class="portfolio-item" data-img="https://via.placeholder.com/800x500?text=eCommerce+Website">
-      <img src="https://via.placeholder.com/400x250?text=eCommerce+Website">
-      <h4>Online Store</h4>
-    </div>
-    <div class="portfolio-item" data-img="images/restaurant.png">
-      <img src="images/restaurant.png">
-      <h4>Restaurant Website</h4>
-    </div>
-    <div class="portfolio-item" data-img="https://via.placeholder.com/800x500?text=School+Website">
-      <img src="https://via.placeholder.com/400x250?text=School+Website">
-      <h4>School / College Website</h4>
-    </div>
+    <div class="portfolio-item" data-title="Hotel Booking System" data-img="https://via.placeholder.com/400x250?text=Hotel+Booking+System"><img src="https://via.placeholder.com/400x250?text=Hotel+Booking+System"><h4>Hotel Booking System</h4></div>
+    <div class="portfolio-item" data-title="LGU Payroll System" data-img="https://via.placeholder.com/400x250?text=LGU+Payroll+System"><img src="https://via.placeholder.com/400x250?text=LGU+Payroll+System"><h4>LGU Payroll System</h4></div>
+    <div class="portfolio-item" data-title="Online Store" data-img="https://via.placeholder.com/400x250?text=eCommerce+Website"><img src="https://via.placeholder.com/400x250?text=eCommerce+Website"><h4>Online Store</h4></div>
+    <div class="portfolio-item" data-title="Restaurant Website" data-img="images/restaurant.png"><img src="images/restaurant.png"><h4>Restaurant Website</h4></div>
+    <div class="portfolio-item" data-title="School / College Website" data-img="https://via.placeholder.com/400x250?text=School+Website"><img src="https://via.placeholder.com/400x250?text=School+Website"><h4>School / College Website</h4></div>
   </div>
 </section>
 
-<div class="modal" id="portfolioModal">
+<!-- Modal -->
+<div class="modal" id="modal">
   <div class="modal-content">
-    <span class="modal-close" id="modalClose">&times;</span>
-    <img src="" id="modalImage">
+    <span class="close" id="close">&times;</span>
+    <h3 id="modal-title"></h3>
+    <img id="modal-img" src="" alt="Screenshot">
   </div>
 </div>
 
 <section class="contact" id="contact">
   <h2>Contact Me</h2>
   <form>
-    <input type="text" placeholder="Your Name" required name="name">
-    <input type="email" placeholder="Your Email" required>
-    <textarea placeholder="Project Details" required></textarea>
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="project" placeholder="Project Details" required></textarea>
     <button class="btn">Send Message</button>
   </form>
 </section>
@@ -394,25 +286,23 @@
   hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
 
   // Portfolio modal
-  const portfolioItems = document.querySelectorAll('.portfolio-item');
-  const modal = document.getElementById('portfolioModal');
-  const modalImg = document.getElementById('modalImage');
-  const modalClose = document.getElementById('modalClose');
-
-  portfolioItems.forEach(item => {
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalTitle = document.getElementById('modal-title');
+  const closeModal = document.getElementById('close');
+  document.querySelectorAll('.portfolio-item').forEach(item => {
     item.addEventListener('click', () => {
       modal.style.display = 'flex';
-      modalImg.src = item.getAttribute('data-img');
+      modalImg.src = item.dataset.img;
+      modalTitle.textContent = item.dataset.title;
     });
   });
-
-  modalClose.addEventListener('click', () => modal.style.display = 'none');
+  closeModal.addEventListener('click', () => modal.style.display = 'none');
   window.addEventListener('click', e => { if(e.target === modal) modal.style.display = 'none'; });
 
   // Choose Plan buttons
   const planButtons = document.querySelectorAll('.choose-plan');
   const contactForm = document.querySelector('.contact form');
-
   planButtons.forEach(button => {
     button.addEventListener('click', () => {
       const planName = button.getAttribute('data-plan');
